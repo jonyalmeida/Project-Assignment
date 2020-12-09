@@ -1,10 +1,11 @@
-const distanceInKmBetweenEarthCoordinates = require("./calculateDistance");
+const { distanceInKmBetweenEarthCoordinates } = require("./calculateDistance");
 const matchScore = require("./matchScore");
-const binaryAdd = require("./sortingAlgorithm");
+const binaryInsert = require("./sortingAlgorithm");
 
 // Match respondents with project params
 function matchRespondents(respondentsDataObject, projectParams) {
     const matchResults = [];
+    let count = 0;
 
     for (let respondent in respondentsDataObject) {
         const curRespondent = respondentsDataObject[respondent];
@@ -20,7 +21,7 @@ function matchRespondents(respondentsDataObject, projectParams) {
             city: "",
         };
         for (let city of projectParams.cities) {
-            let curDistance = null;
+            let curDistance = 0;
 
             // if (city.location.city.toLowerCase() === curRespondent.city) {
             //     curRespondentOutput.closestAvailableCity = {
@@ -38,9 +39,6 @@ function matchRespondents(respondentsDataObject, projectParams) {
                 { lat: curRespondent.lat, lon: curRespondent.lon }
             );
 
-            if (curDistance > 100) {
-                continue;
-            }
             if (
                 curDistance < curRespondentOutput.closestAvailableCity.distance
             ) {
@@ -64,7 +62,6 @@ function matchRespondents(respondentsDataObject, projectParams) {
             ),
             jobTitle: curRespondent.jobTitle,
         };
-        // if (!curRespondentOutput.jobMatches.match) continue;
 
         // Check number of matches for industries
         const curRespondentMatchingIndustries = projectParams.professionalIndustry.filter(
@@ -75,8 +72,6 @@ function matchRespondents(respondentsDataObject, projectParams) {
             number: curRespondentMatchingIndustries.length,
             industries: curRespondentMatchingIndustries,
         };
-        // if (!curRespondentOutput.numberIndustriesMatch.numberOfMatches)
-        //     continue;
 
         // Calculate matching score
         curRespondentOutput.score = matchScore(
@@ -85,11 +80,8 @@ function matchRespondents(respondentsDataObject, projectParams) {
         );
 
         // Adds respondent to results array at sorted index by score rating
-        matchResults.splice(
-            binaryAdd(matchResults, curRespondentOutput),
-            0,
-            curRespondentOutput
-        );
+
+        binaryInsert(curRespondentOutput, matchResults);
     }
 
     return matchResults;

@@ -15,7 +15,7 @@ function matchScore(industryList, respondent) {
     const score =
         ((industryMatchScore + distanceMatchScore + jobMatchScore) * 100) / 300;
 
-    return score;
+    return score.toFixed(2);
 }
 
 module.exports = matchScore;
