@@ -7,11 +7,7 @@ function matchRespondents(respondentsDataObject, projectParams) {
     const matchResults = [];
 
     for (let respondent in respondentsDataObject) {
-        const curRespondent = {};
-
-        for (let key in respondentsDataObject[respondent]) {
-            curRespondent[key] = respondentsDataObject[respondent][key];
-        }
+        const curRespondent = respondentsDataObject[respondent];
 
         // Initialize current respondent output object
         const curRespondentOutput = { name: curRespondent.firstName };

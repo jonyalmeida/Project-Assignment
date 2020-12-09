@@ -19,8 +19,10 @@ async function matchRespondentsList(respondentsDataFilePath, projectParams) {
     for (let i = 0; i < 8; i++) {
         c.push(b[b.length - 1 - i]);
     }
-
+    console.log(c);
     return c;
 }
 
 module.exports = matchRespondentsList;
+
+matchRespondentsList("./data/respondents_data_test.csv", projectParams);

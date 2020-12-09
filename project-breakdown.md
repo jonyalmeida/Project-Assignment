@@ -31,3 +31,9 @@
 -   calculate distance test
 -   return correct parsed data from csv file test
 -   test matching function
+-   test input data
+-   test edge cases
+-   cover all errors
+-   cover all edge cases
+-   test cases for locations && coordinates
+-   test distance
