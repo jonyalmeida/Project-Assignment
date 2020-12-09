@@ -1,17 +1,19 @@
 const express = require("express");
 
-// Create the Express app.
+// const match = require("../matchRespondents");
+
 const app = express();
 
-// Set the pug view engine.
 app.set("view engine", "pug");
 
-// Define a route.
-app.get("/", (req, res) => {
-    res.render("index");
+app.get("/", async (req, res) => {
+    let results = await match();
+    results = results.filter(
+        (item) => item.numberIndustriesMatch.numberOfMatches >= 2
+    );
+    res.render("index", { results });
 });
 
-// Define a port and start listening for connections.
 const port = 8081;
 
 app.listen(port, () => console.log(`Listening on port ${port}...`));

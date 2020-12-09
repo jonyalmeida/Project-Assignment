@@ -1,11 +1,19 @@
 {
-  "name": "respondent-software_engineer-back_end-technical_test",
-  "version": "1.0.0",
-  "description": "Matching Respondents with Projects",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "jony_almeida",
-  "license": "ISC"
+    "name": "respondent-software_engineer-back_end-technical_test",
+    "version": "1.0.0",
+    "description": "Matching Respondents with Projects",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon ./app/index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "jony_almeida",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.1",
+        "pug": "^3.0.0"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.6"
+    }
 }
