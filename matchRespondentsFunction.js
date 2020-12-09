@@ -78,8 +78,11 @@ function distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2) {
 function matchRespondents(respondentsDataObject, projectParams) {
     const matchResults = [];
 
+    let curRespondent = {};
     for (let respondent in respondentsDataObject) {
-        const curRespondent = respondentsDataObject[respondent];
+        for (let key in respondentsDataObject[respondent]) {
+            curRespondent[key] = respondentsDataObject[respondent][key];
+        }
 
         // Initialize current respondent object
         const curRespondentOutput = {};
@@ -91,21 +94,25 @@ function matchRespondents(respondentsDataObject, projectParams) {
             distance: Infinity,
             city: "",
         };
-        for (let city in projectParams.cities) {
+        for (let city of projectParams.cities) {
             let curDistance = null;
-            if (city === curRespondent.city) {
+            if (city.location.city.toLowerCase() === curRespondent.city) {
                 curRespondentOutput.distanceToClosestAvailableCity = {
                     distance: 0,
-                    city: city,
+                    city: city.location.city,
                 };
                 break;
             }
             curDistance = distanceInKmBetweenEarthCoordinates(
                 city.location.location.latitude,
-                city.location.location.longitude
+                city.location.location.longitude,
+                curRespondent.lat,
+                curRespondent.lon
             );
-            if (curDistance > 100) continue;
 
+            if (curDistance > 100) {
+                continue;
+            }
             if (
                 curDistance <
                 curRespondentOutput.distanceToClosestAvailableCity.distance
@@ -114,38 +121,52 @@ function matchRespondents(respondentsDataObject, projectParams) {
             }
         }
 
-        if (curRespondentOutput.distanceToClosestAvailableCity.distance > 100)
+        if (curRespondentOutput.distanceToClosestAvailableCity.distance > 100) {
             continue;
+        }
+
+        // Check if job title match
+        curRespondentOutput.jobMatches = {
+            match: projectParams.professionalJobTitles.some(
+                (item) => item.toLowerCase() === curRespondent.jobTitle
+            ),
+            jobTitle: curRespondent.jobTitle,
+        };
+        if (!curRespondentOutput.jobMatches.match) continue;
 
         // Check number of matches for industries
-        const curRespondentMatchingIndustries = curRespondent.industry.filter(
-            (industry) => projectParams.professionalIndustry.includes(industry)
+        const curRespondentMatchingIndustries = projectParams.professionalIndustry.filter(
+            (industry) =>
+                curRespondent.industry.includes(industry.toLowerCase())
         );
         curRespondentOutput.numberIndustriesMatch = {
             numberOfMatches: curRespondentMatchingIndustries.length,
             industryMatches: curRespondentMatchingIndustries,
         };
-
-        // Check if job title match
-        curRespondentOutput.jobMatches = {
-            match: projectParams.professionalJobTitles.includes(
-                curRespondent.jobTitle
-            ),
-            jobTitle: curRespondent.jobTitle,
-        };
+        if (!curRespondentOutput.numberIndustriesMatch.numberOfMatches)
+            continue;
 
         // Adds respondent to results array
-        matchResults.push(curRespondent);
+        matchResults.push(curRespondentOutput);
     }
 
     return matchResults;
 }
 
-async function listOfMatchingRespondents(respondentsDataFilePath) {
+async function listOfMatchingRespondents(
+    respondentsDataFilePath,
+    projectParams
+) {
     const a = await readRespondentsData(respondentsDataFilePath);
-    console.log(a);
+    // console.log(a);
 
     const b = matchRespondents(a, projectParams);
-    console.log(b);
+    console.log(b.length);
+
+    b.forEach((item) => {
+        if (item.numberIndustriesMatch.numberOfMatches >= 2) {
+            console.log(item);
+        }
+    });
 }
-listOfMatchingRespondents("./data/respondents_data_test.csv");
+listOfMatchingRespondents("./data/respondents_data_test.csv", projectParams);
