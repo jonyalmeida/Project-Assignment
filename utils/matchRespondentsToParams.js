@@ -32,10 +32,10 @@ function matchRespondents(respondentsDataObject, projectParams) {
 
             curDistance = distanceInKmBetweenEarthCoordinates(
                 {
-                    lat1: city.location.location.latitude,
-                    lon1: city.location.location.longitude,
+                    lat: city.location.location.latitude,
+                    lon: city.location.location.longitude,
                 },
-                { lat2: curRespondent.lat, lon2: curRespondent.lon }
+                { lat: curRespondent.lat, lon: curRespondent.lon }
             );
 
             if (curDistance > 100) {

@@ -28,12 +28,27 @@
 
 ## Write tests
 
--   calculate distance test
+-   calculate distance function
+
+    -   test for valid coordinates input
+    -   checks distance calculation
+    -   check degrees to radian conversion
+
 -   return correct parsed data from csv file test
--   test matching function
--   test input data
--   test edge cases
--   cover all errors
--   cover all edge cases
--   test cases for locations && coordinates
--   test distance
+
+    -   test input file is .csv format
+    -   test number of lines in input file against number of entries in result obj
+    -   test parsed data quality
+
+-   matching function
+
+    -   test edge cases
+    -   cover all errors
+
+-   matchScore function
+
+    -   test score calculation
+
+-   sortingAlgorithm function
+    -   test input values are correctly sorted
+    -   test edge cases

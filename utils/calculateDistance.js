@@ -1,11 +1,16 @@
 // Calculate distance between two locations using geo coordinates
 function distanceInKmBetweenEarthCoordinates(location1, location2) {
-    let { lat1, lon1 } = location1;
-    let { lat2, lon2 } = location2;
+    let { lat: lat1, lon: lon1 } = location1;
+    let { lat: lat2, lon: lon2 } = location2;
 
-    //Convert degress to radians
-    function degreesToRadians(degrees) {
-        return (degrees * Math.PI) / 180;
+    // Check if locations have valid coordinates
+    if (Math.abs(lat1) > 90 || Math.abs(lat2) > 90) {
+        return "Latitude out of range.";
+        // throw Error("Latitude out of range.");
+    }
+    if (Math.abs(lon1) > 180 || Math.abs(lon2) > 180) {
+        return "Longitude out of range.";
+        // throw Error("Longitude out of range.");
     }
 
     const earthRadiusInKm = 6378.137;
@@ -25,7 +30,12 @@ function distanceInKmBetweenEarthCoordinates(location1, location2) {
 
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-    return (earthRadiusInKm * c).toFixed(2);
+    return Number((earthRadiusInKm * c).toFixed(2));
 }
 
-module.exports = distanceInKmBetweenEarthCoordinates;
+//Convert degress to radians
+function degreesToRadians(degrees) {
+    return (degrees * Math.PI) / 180;
+}
+
+module.exports = { distanceInKmBetweenEarthCoordinates, degreesToRadians };
