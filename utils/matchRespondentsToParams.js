@@ -25,6 +25,7 @@ function matchRespondents(respondentsDataObject, projectParams) {
         };
         for (let city of projectParams.cities) {
             let curDistance = null;
+
             // if (city.location.city.toLowerCase() === curRespondent.city) {
             //     curRespondentOutput.closestAvailableCity = {
             //         distance: 0,
@@ -32,6 +33,7 @@ function matchRespondents(respondentsDataObject, projectParams) {
             //     };
             //     break;
             // }
+
             curDistance = distanceInKmBetweenEarthCoordinates(
                 {
                     lat1: city.location.location.latitude,

@@ -4,10 +4,7 @@ const projectParams = require("./data/project.json");
 const readRespondentsData = require("./utils/parseInputDataFunc");
 const matchRespondents = require("./utils/matchRespondentsToParams");
 
-async function listOfMatchingRespondents(
-    respondentsDataFilePath,
-    projectParams
-) {
+async function matchRespondentsList(respondentsDataFilePath, projectParams) {
     // Check file is .csv
     if (!respondentsDataFilePath.endsWith(".csv")) {
         return "Invalid data filetype.";
@@ -17,11 +14,13 @@ async function listOfMatchingRespondents(
 
     const b = matchRespondents(parsedData, projectParams);
 
+    let c = [];
+
     for (let i = 0; i < 8; i++) {
-        console.log(b[b.length - 1 - i]);
+        c.push(b[b.length - 1 - i]);
     }
+
+    return c;
 }
 
-console.log(
-    listOfMatchingRespondents("./data/respondents_data_test.csv", projectParams)
-);
+module.exports = matchRespondentsList;

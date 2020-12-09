@@ -1,16 +1,20 @@
 const express = require("express");
 
-// const match = require("../matchRespondents");
+const matchRespondents = require("../matchRespondents");
+const projectParams = require("../data/project.json");
 
 const app = express();
 
 app.set("view engine", "pug");
 
 app.get("/", async (req, res) => {
-    let results = await match();
-    results = results.filter(
-        (item) => item.numberIndustriesMatch.numberOfMatches >= 2
+    let results = await matchRespondents(
+        "./data/respondents_data_test.csv",
+        projectParams
     );
+
+    console.log(results);
+
     res.render("index", { results });
 });
 

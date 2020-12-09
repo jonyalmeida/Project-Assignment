@@ -6,6 +6,12 @@ html(lang="en")
         title Document
     body
         ul
-            each result in results
-                li #{result.distanceToClosestAvailableCity.city}
-                li #{result.jobMatches.jobTitle}
+            if results
+                 each result in results
+                    li
+                        ul
+                            li Respondent name: #{result.name}
+                            li Closest city: #{result.closestAvailableCity.city}
+                            li Distance to closest city: #{result.closestAvailableCity.distance}
+                            li Matching Score: #{result.score}
+                    p ----------------------------------------------
