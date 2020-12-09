@@ -1,5 +1,6 @@
 const distanceInKmBetweenEarthCoordinates = require("./calculateDistance");
 const matchScore = require("./matchScore");
+const binaryAdd = require("./sortingAlgorithm");
 
 // Match respondents with project params
 function matchRespondents(respondentsDataObject, projectParams) {
@@ -85,8 +86,12 @@ function matchRespondents(respondentsDataObject, projectParams) {
             curRespondentOutput
         );
 
-        // Adds respondent to results array
-        matchResults.push(curRespondentOutput);
+        // Adds respondent to results array at sorted index by score rating
+        matchResults.splice(
+            binaryAdd(matchResults, curRespondentOutput),
+            0,
+            curRespondentOutput
+        );
     }
 
     return matchResults;

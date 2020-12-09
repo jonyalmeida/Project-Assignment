@@ -17,7 +17,9 @@ async function listOfMatchingRespondents(
 
     const b = matchRespondents(parsedData, projectParams);
 
-    console.log(b);
+    for (let i = 0; i < 8; i++) {
+        console.log(b[b.length - 1 - i]);
+    }
 }
 
 console.log(
