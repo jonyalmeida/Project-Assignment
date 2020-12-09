@@ -2,6 +2,7 @@ const fs = require("fs").promises;
 
 // Load project params as JS object
 const projectParams = require("./data/project.json");
+
 // Read Respondents' data from .csv file
 async function readRespondentsData(respondentsDataFilePath) {
     const respondentsData = await fs.readFile(
@@ -49,7 +50,7 @@ async function readRespondentsData(respondentsDataFilePath) {
     return respondentsDataObject;
 }
 
-// Calculate distance using geo coordinates
+// Calculate distance between two points using geo coordinates
 function distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2) {
     function degreesToRadians(degrees) {
         return (degrees * Math.PI) / 180;
@@ -83,10 +84,15 @@ function matchRespondents(respondentsDataObject, projectParams) {
         // Initialize current respondent object
         const curRespondentOutput = {};
 
-        //calculate respondent distance to available cities
-        let closestCityDistance = Infinity;
-        let distance = null;
+        // Calculate respondent distance to available cities
+        // Since only eliminating factor is distance > 100km
+        // If closest distance to any available city > 100km continue to next respondent
+        curRespondentOutput.distanceToClosestAvailableCity = {
+            distance: Infinity,
+            city: "",
+        };
         for (let city in projectParams.cities) {
+            let curDistance = null;
             if (city === curRespondent.city) {
                 curRespondentOutput.distanceToClosestAvailableCity = {
                     distance: 0,
@@ -94,16 +100,22 @@ function matchRespondents(respondentsDataObject, projectParams) {
                 };
                 break;
             }
-            const distance = distanceInKmBetweenEarthCoordinates(
+            curDistance = distanceInKmBetweenEarthCoordinates(
                 city.location.location.latitude,
                 city.location.location.longitude
             );
-            if (distance > 100) continue;
+            if (curDistance > 100) continue;
 
-            if (distance < closestCityDistance) closestCityDistance = distance;
+            if (
+                curDistance <
+                curRespondentOutput.distanceToClosestAvailableCity.distance
+            ) {
+                curRespondentOutput.distanceToClosestAvailableCity.distance = curDistance;
+            }
         }
 
-        if (distance > 100) continue;
+        if (curRespondentOutput.distanceToClosestAvailableCity.distance > 100)
+            continue;
 
         // Check number of matches for industries
         const curRespondentMatchingIndustries = curRespondent.industry.filter(
@@ -122,34 +134,18 @@ function matchRespondents(respondentsDataObject, projectParams) {
             jobTitle: curRespondent.jobTitle,
         };
 
+        // Adds respondent to results array
         matchResults.push(curRespondent);
     }
+
+    return matchResults;
 }
 
-console.log(
-    matchRespondents(
-        {
-            industry: [
-                "Banking",
-                "Financial Services",
-                "123",
-                "4341",
-                "Computer Software",
-            ],
-            jobTitle: "dev",
-        },
-        {
-            professionalIndustry: [
-                "Banking",
-                "Financial Services",
-                "Government Administration",
-                "Insurance",
-                "Retail",
-                "Supermarkets",
-                "Automotive",
-                "Computer Software",
-            ],
-            professionalJobTitles: ["de2v", "12", "21"],
-        }
-    )
-);
+async function listOfMatchingRespondents(respondentsDataFilePath) {
+    const a = await readRespondentsData(respondentsDataFilePath);
+    console.log(a);
+
+    const b = matchRespondents(a, projectParams);
+    console.log(b);
+}
+listOfMatchingRespondents("./data/respondents_data_test.csv");
