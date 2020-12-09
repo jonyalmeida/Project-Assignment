@@ -24,16 +24,17 @@ function readRespondentsData(respondentsDataFilePath) {
         case 2:
           respondentsData = _context.sent;
           // Parse data into organized usable data
-          // Split data into lines as 1 entry === 1 line
-          parseLines = respondentsData.split("\n").slice(1); // Map over array of entry lines
-          // Split lines into entry with key(categories) value(information) pairs
-          // Formats values to lower case
-          // Stores organized data in respondentsDataObject using the line # index as keys
+          // Split data into lines as 1 entry per line
+          parseLines = respondentsData.split("\n").slice(1); // Initialize respondents' data object
 
-          respondentsDataObject = {};
+          respondentsDataObject = {}; // Map over array of entry lines
+
           parseLines.map(function (line, idx) {
             if (line) {
-              var entry = line.toLowerCase().split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+              var entry = line // Formats values to lower case
+              .toLowerCase().split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/); // Split lines into entry with key(categories) value(information) pairs
+              // Stores organized data in respondentsDataObject using the line number index as keys
+
               respondentsDataObject[idx] = {
                 firstName: entry[0],
                 gender: entry[1],
@@ -166,26 +167,36 @@ function matchRespondents(respondentsDataObject, projectParams) {
 }
 
 function listOfMatchingRespondents(respondentsDataFilePath, projectParams) {
-  var a, b;
+  var a, b, count;
   return regeneratorRuntime.async(function listOfMatchingRespondents$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          _context2.next = 2;
-          return regeneratorRuntime.awrap(readRespondentsData(respondentsDataFilePath));
+          if (respondentsDataFilePath.endsWith(".csv")) {
+            _context2.next = 2;
+            break;
+          }
+
+          return _context2.abrupt("return", "Invalid data filetype.");
 
         case 2:
+          _context2.next = 4;
+          return regeneratorRuntime.awrap(readRespondentsData(respondentsDataFilePath));
+
+        case 4:
           a = _context2.sent;
           // console.log(a);
           b = matchRespondents(a, projectParams);
           console.log(b.length);
+          count = 0;
           b.forEach(function (item) {
             if (item.numberIndustriesMatch.numberOfMatches >= 2) {
-              console.log(item);
+              count++;
+              console.log(item, count);
             }
           });
 
-        case 6:
+        case 9:
         case "end":
           return _context2.stop();
       }
@@ -193,4 +204,4 @@ function listOfMatchingRespondents(respondentsDataFilePath, projectParams) {
   });
 }
 
-listOfMatchingRespondents("./data/respondents_data_test.csv", projectParams);
+console.log(listOfMatchingRespondents("./data/respondents_data_test.txt", projectParams));

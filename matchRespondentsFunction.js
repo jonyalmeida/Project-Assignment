@@ -17,21 +17,22 @@ async function readRespondentsData(respondentsDataFilePath) {
     );
 
     // Parse data into organized usable data
-    // Split data into lines as 1 entry === 1 line
+    // Split data into lines as 1 entry per line
     const parseLines = respondentsData.split("\n").slice(1);
 
-    // Map over array of entry lines
-    // Split lines into entry with key(categories) value(information) pairs
-    // Formats values to lower case
-    // Stores organized data in respondentsDataObject using the line # index as keys
+    // Initialize respondents' data object
     respondentsDataObject = {};
 
+    // Map over array of entry lines
     parseLines.map((line, idx) => {
         if (line) {
             const entry = line
+                // Formats values to lower case
                 .toLowerCase()
                 .split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
 
+            // Split lines into entry with key(categories) value(information) pairs
+            // Stores organized data in respondentsDataObject using the line number index as keys
             respondentsDataObject[idx] = {
                 firstName: entry[0],
                 gender: entry[1],
@@ -157,16 +158,25 @@ async function listOfMatchingRespondents(
     respondentsDataFilePath,
     projectParams
 ) {
+    // Check file is .csv
+    if (!respondentsDataFilePath.endsWith(".csv")) {
+        return "Invalid data filetype.";
+    }
+
     const a = await readRespondentsData(respondentsDataFilePath);
     // console.log(a);
 
     const b = matchRespondents(a, projectParams);
     console.log(b.length);
-
+    let count = 0;
     b.forEach((item) => {
         if (item.numberIndustriesMatch.numberOfMatches >= 2) {
-            console.log(item);
+            count++;
+            console.log(item, count);
         }
     });
 }
-listOfMatchingRespondents("./data/respondents_data_test.csv", projectParams);
+
+console.log(
+    listOfMatchingRespondents("./data/respondents_data_test.txt", projectParams)
+);
