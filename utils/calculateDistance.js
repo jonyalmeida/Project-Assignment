@@ -5,7 +5,6 @@ function distanceInKmBetweenEarthCoordinates(location1, location2) {
 
     // Check if locations have valid coordinates
     if (Math.abs(lat1) > 90 || Math.abs(lat2) > 90) {
-        console.log("jdaIAJDOIJSA");
         throw new InvalidCoordinateException();
     }
     if (Math.abs(lon1) > 180 || Math.abs(lon2) > 180) {
