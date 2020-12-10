@@ -39,12 +39,23 @@ describe("readRespondentsData()", async () => {
     });
 
     describe("check that every entry in object has valid values", () => {
-        it("should have truthy values", () => {
+        it("should have all truthy values", () => {
             let result = (() =>
                 Object.keys(parsedData).every((item) =>
                     Object.keys(item).every((item) => item)
                 ))();
             let expected = true;
+
+            assert.strictEqual(result, expected);
+        });
+
+        it("should return false if object has falsy values", () => {
+            parsedData["499"].firstName = "";
+            let result = (() =>
+                Object.keys(parsedData).every((item) => {
+                    Object.keys(item).every((item2) => !!item2);
+                }))();
+            let expected = false;
 
             assert.strictEqual(result, expected);
         });
