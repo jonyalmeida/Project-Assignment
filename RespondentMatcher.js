@@ -2,7 +2,7 @@
 const projectParams = require("./data/project.json");
 
 // Load utils functions
-const readRespondentsData = require("./utils/parseInputData");
+const { readRespondentsData } = require("./utils/parseInputData");
 const matchRespondents = require("./utils/matchRespondentsToParams");
 
 // Declare class
@@ -14,13 +14,12 @@ class RespondentMatcher {
         this.parsedData = {};
     }
 
-    // Check file is .csv
-    validateDataFileType() {
-        console.log(this.respondentsDataFilePath);
-        if (!this.respondentsDataFilePath.endsWith(".csv")) {
-            console.log("Invalid data filetype.");
-        }
-        console.log("Valid data filetype.");
+    // Class getters
+    getRespondentsDataFilePath() {
+        return this.respondentsDataFilePath;
+    }
+    getProjectParams() {
+        return this.projectParams;
     }
 
     async parseData() {
@@ -93,18 +92,17 @@ class RespondentMatcher {
     }
 }
 
-const newMatch = new RespondentMatcher(
+const newMatcher = new RespondentMatcher(
     "./data/respondents_data_test.csv",
     projectParams
 );
 
 const demo = () =>
     (async () => {
-        await newMatch.parseData();
-        // newMatch.validateDataFileType();
-        newMatch.matchRespondentsToProjectParams();
-        newMatch.displayTopEightMatchedRespondents();
-        newMatch.displayAllMatchedRespondents();
+        await newMatcher.parseData();
+        newMatcher.matchRespondentsToProjectParams();
+        newMatcher.displayTopEightMatchedRespondents();
+        // newMatcher.displayAllMatchedRespondents();
     })();
 
 demo();

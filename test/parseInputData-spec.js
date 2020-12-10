@@ -1,9 +1,16 @@
 const assert = require("assert");
+const chai = require("chai");
+const expect = chai.expect;
+chai.use(require("chai-as-promised"));
 const fs = require("fs").promises;
 
-const readRespondentsData = require("../utils/parseInputData");
+const {
+    readRespondentsData,
+    FileTypeException,
+} = require("../utils/parseInputData");
 
 const file = "./data/respondents_data_test.csv";
+const badFile = "image.jpg";
 
 describe("readRespondentsData()", async () => {
     const parsedData = await readRespondentsData(file);
@@ -12,6 +19,14 @@ describe("readRespondentsData()", async () => {
             return `Error reading file.\n${err}`;
         }
         return data;
+    });
+
+    describe("checks filetype is .csv", () => {
+        it("should throw FyleTypeException when given wrong file format", async () => {
+            await expect(readRespondentsData(badFile)).to.be.rejectedWith(
+                FileTypeException(badFile)
+            );
+        });
     });
 
     describe("check number of entries in obj", () => {

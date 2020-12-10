@@ -16,8 +16,6 @@ app.get("/", async (req, res) => {
     newMatch.matchRespondentsToProjectParams();
     let results = newMatch.returnTopEightResults();
 
-    console.log(results);
-
     res.render("index", { results });
 });
 

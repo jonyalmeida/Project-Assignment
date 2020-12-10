@@ -1,8 +1,10 @@
 const assert = require("assert");
+const { expect } = require("chai");
 
 const {
     distanceInKmBetweenEarthCoordinates,
     degreesToRadians,
+    InvalidCoordinateException,
 } = require("../utils/calculateDistance");
 
 const location1 = { lat: 32.7766642, lon: -96.7969879 };
@@ -12,24 +14,16 @@ const location4 = { lat: 0, lon: -181 };
 
 describe("distanceInKmBetweenEarthCoordinates()", () => {
     describe("checks for valid coordinates input", () => {
-        it("should return 'latitude out of range' when latitude input is out of valid range", () => {
-            let test = distanceInKmBetweenEarthCoordinates(
-                location1,
-                location3
-            );
-            let result = "Latitude out of range.";
-
-            assert.strictEqual(test, result);
+        it("should throw InvalidCoordinateException when latitude input is out of valid range", () => {
+            expect(() =>
+                distanceInKmBetweenEarthCoordinates(location3, location1)
+            ).to.throw(InvalidCoordinateException());
         });
 
-        it("should return 'longitude out of range' when longitude input is out of valid range", () => {
-            let test = distanceInKmBetweenEarthCoordinates(
-                location1,
-                location4
-            );
-            let result = "Longitude out of range.";
-
-            assert.strictEqual(test, result);
+        it("should throw InvalidCoordinateException when longitude input is out of valid range", () => {
+            expect(() =>
+                distanceInKmBetweenEarthCoordinates(location4, location1)
+            ).to.throw(InvalidCoordinateException());
         });
     });
 

@@ -10,11 +10,14 @@
     "author": "jony_almeida",
     "license": "ISC",
     "dependencies": {
+        "chai-as-promised": "^7.1.1",
         "express": "^4.17.1",
         "mocha": "^8.2.1",
         "pug": "^3.0.0"
     },
     "devDependencies": {
+        "chai": "^4.2.0",
+        "chai-spies": "^1.0.0",
         "nodemon": "^2.0.6"
     }
 }
