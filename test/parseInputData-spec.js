@@ -39,7 +39,7 @@ describe("readRespondentsData()", async () => {
     });
 
     describe("check that every entry in object has valid values", () => {
-        it("should match every name", () => {
+        it("should have truthy values", () => {
             let result = (() =>
                 Object.keys(parsedData).every((item) =>
                     Object.keys(item).every((item) => item)

@@ -19,15 +19,15 @@ describe("RespondentMatcher()", () => {
 
     describe("checks class constructor", () => {
         it("should return this.respondentsDataFilePath as filePatch", () => {
-            let result = (() =>
+            let test = (() =>
                 matcher.getRespondentsDataFilePath() === filePath)();
 
-            let expected = true;
+            let result = true;
 
-            assert.strictEqual(result, expected);
+            assert.strictEqual(test, result);
         });
         it("should return this.projectParams as projectParams", () => {
-            let result = (() => {
+            let test = (() => {
                 for (let key in matcher.projectParams) {
                     if (matcher.projectParams[key] !== projectParams[key]) {
                         return false;
@@ -36,18 +36,18 @@ describe("RespondentMatcher()", () => {
                 }
             })();
 
-            let expected = true;
+            let result = true;
 
-            assert.strictEqual(result, expected);
+            assert.strictEqual(test, result);
         });
     });
 
     describe("check that 8 results are returned", () => {
         it("should return array of length 8", () => {
-            let result = matcher.returnTopEightResults().length;
-            let expected = 8;
+            let test = matcher.returnTopEightResults().length;
+            let result = 8;
 
-            assert.strictEqual(strictEqual(result, expected));
+            assert.strictEqual(strictEqual(test, result));
         });
 
         it("should return array with abdullah as top result", () => {

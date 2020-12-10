@@ -31,6 +31,7 @@ Respondent Matcher is designed as a stand alone algorithm that will take in resp
 Built in Node.js, with Javascript and tested with Mocha & Chai Assertion Library.
 
 ## Backend Overview
+
 ### Backend Technologies Used
 
 #### Mocha
@@ -50,8 +51,9 @@ Built in Node.js, with Javascript and tested with Mocha & Chai Assertion Library
 [Pug](https://www.pug.org/) was perfect for creating a web visualization of the results.
 
 ## Code Highlights
+
 ```javascript
-//Async Mocha handle hook with mocha-as-promised library
+//Async Mocha handle hook with chai-as-promised library
     describe("checks filetype is .csv", () => {
         it("should throw FyleTypeException when given wrong file format", async () => {
             await expect(readRespondentsData(badFile)).to.be.rejectedWith(
@@ -119,9 +121,10 @@ function matchScore(industryList, respondent) {
 ```
 
 ## Considerations
-- I assumed that the 3 scoring factors had the same weight when calculating the Matching Score
-- I assumed that a Respondent candidate closest distance would be the closest distance to any of the available cities in the project params cities array  
-- Added a project breakdown readme file with an overall planning of the steps before starting
+
+-   I assumed that the 3 scoring factors had the same weight when calculating the Matching Score
+-   I assumed that a Respondent candidate closest distance would be the closest distance to any of the available cities in the project params cities array
+-   Added a project breakdown readme file with an overall planning of the steps before starting
 
 **Next Steps:**
 Next steps for Respondent Matcher include:
