@@ -18,6 +18,7 @@ By Jony Almeida-
 -   [Respondent Matcher at a Glance](#matcher-at-a-glance)
 -   [Application Architecture & Technologies Used](#application-architecture)
 -   [Backend Overview](#backend-overview)
+-   [Code Highlights](#code-highlights)
 -   [Conclusion & Next Steps](#conclusion-and-next-steps)
 
 ## Respondent Matcher at a Glance
@@ -29,15 +30,16 @@ Respondent Matcher is Scoring Algorithm function that calculates a Respondent ca
 Respondent Matcher is designed as a stand alone algorithm that will take in respondents' data in csv format and the project parameters for ideal matching, as arguments.
 Built in Node.js, with Javascript and tested with Mocha & Chai Assertion Library.
 
+## Backend Overview
 ### Backend Technologies Used
 
 #### Mocha
 
-[Mocha](https://mocha.org/) provided the simple to follow formatted test output.
+[Mocha](https://mochajs.org/) provided the simple to follow formatted test output.
 
 #### Chai
 
-[Express](https://expressjs.com/) added more testing options as an assertion library.
+[Express](https://chaijs.com/) added more testing options as an assertion library.
 
 #### ExpressJS
 
@@ -47,8 +49,7 @@ Built in Node.js, with Javascript and tested with Mocha & Chai Assertion Library
 
 [Pug](https://www.pug.org/) was perfect for creating a web visualization of the results.
 
-##### Tests
-
+## Code Highlights
 ```javascript
 //Async Mocha handle hook with mocha-as-promised library
     describe("checks filetype is .csv", () => {
