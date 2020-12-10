@@ -23,6 +23,7 @@ function matchRespondents(respondentsDataObject, projectParams) {
         for (let city of projectParams.cities) {
             let curDistance = 0;
 
+            // Left commented out
             // if (city.location.city.toLowerCase() === curRespondent.city) {
             //     curRespondentOutput.closestAvailableCity = {
             //         distance: 0,
