@@ -3,7 +3,7 @@ const chai = require("chai");
 const expect = chai.expect;
 chai.use(require("chai-as-promised"));
 
-const RespondentMatcher = require("../RespondentMatcher");
+const { RespondentMatcher } = require("../RespondentMatcher");
 const projectParams = require("../data/project.json");
 const { strictEqual } = require("assert");
 

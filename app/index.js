@@ -1,6 +1,6 @@
 const express = require("express");
 
-const RespondentMatcher = require("../RespondentMatcher");
+const { RespondentMatcher } = require("../RespondentMatcher");
 const projectParams = require("../data/project.json");
 
 const app = express();

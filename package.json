@@ -4,8 +4,9 @@
     "description": "Matching Respondents with Projects",
     "main": "index.js",
     "scripts": {
-        "run": "node RespondentMatcher.js",
-        "start": "./app/index.js",
+        "run": "npx run-func RespondentMatcher.js demo",
+        "run2": "npx run-func RespondentMatcher.js demo2",
+        "start": "node ./app/index.js",
         "nodemon-start": "nodemon ./app/index.js",
         "test": "./node_modules/mocha/bin/mocha"
     },

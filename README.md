@@ -7,7 +7,11 @@ By Jony Almeida-
 -   for outputting the top 8 matches, please run:
     'npm run run'
 -   for running the tests, please run:
-    'npm run test'
+    'npm install --only=dev' 'npm run test'
+-   for outputting the all matches in order, please run:
+    'npm run run2'
+-   for initializing the Express server to visualize results on browser, please run:
+    'npm install' --> 'npm start'
 
 **Table of Contents**
 

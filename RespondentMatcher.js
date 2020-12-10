@@ -107,9 +107,13 @@ const demo = () =>
         await newMatcher.parseData();
         newMatcher.matchRespondentsToProjectParams();
         newMatcher.displayTopEightMatchedRespondents();
-        // newMatcher.displayAllMatchedRespondents();
     })();
 
-demo();
+const demo2 = () =>
+    (async () => {
+        await newMatcher.parseData();
+        newMatcher.matchRespondentsToProjectParams();
+        newMatcher.displayAllMatchedRespondents();
+    })();
 
-module.exports = RespondentMatcher;
+module.exports = { RespondentMatcher, demo, demo2 };
