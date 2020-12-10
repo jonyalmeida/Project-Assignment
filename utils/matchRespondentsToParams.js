@@ -80,7 +80,6 @@ function matchRespondents(respondentsDataObject, projectParams) {
         );
 
         // Adds respondent to results array at sorted index by score rating
-
         binaryInsert(curRespondentOutput, matchResults);
     }
 

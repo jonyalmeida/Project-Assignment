@@ -2,7 +2,7 @@
 const projectParams = require("./data/project.json");
 
 // Load utils functions
-const readRespondentsData = require("./utils/parseInputDataFunc");
+const readRespondentsData = require("./utils/parseInputData");
 const matchRespondents = require("./utils/matchRespondentsToParams");
 
 // Declare class
@@ -31,6 +31,14 @@ class RespondentMatcher {
 
     matchRespondentsToProjectParams() {
         this.results = matchRespondents(this.parsedData, this.projectParams);
+    }
+
+    returnTopEightResults() {
+        let results = [];
+        for (let i = 0; i < 8; i++) {
+            results.push(this.results[this.results.length - 1 - i]);
+        }
+        return results;
     }
 
     displayAllMatchedRespondents() {
@@ -100,3 +108,5 @@ const demo = () =>
     })();
 
 demo();
+
+module.exports = RespondentMatcher;

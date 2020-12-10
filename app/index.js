@@ -1,6 +1,6 @@
 const express = require("express");
 
-const matchRespondents = require("../matchRespondents");
+const RespondentMatcher = require("../RespondentMatcher");
 const projectParams = require("../data/project.json");
 
 const app = express();
@@ -8,10 +8,13 @@ const app = express();
 app.set("view engine", "pug");
 
 app.get("/", async (req, res) => {
-    let results = await matchRespondents(
+    const newMatch = new RespondentMatcher(
         "./data/respondents_data_test.csv",
         projectParams
     );
+    await newMatch.parseData();
+    newMatch.matchRespondentsToProjectParams();
+    let results = newMatch.returnTopEightResults();
 
     console.log(results);
 

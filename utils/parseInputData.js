@@ -21,8 +21,8 @@ async function readRespondentsData(respondentsDataFilePath) {
     // Initialize respondents' data object
     respondentsDataObject = {};
 
-    // Map over array of entry lines
-    parseLines.map((line, idx) => {
+    // Iterate over array of entry lines
+    parseLines.forEach((line, idx) => {
         if (line) {
             const entry = line
                 // Formats values to lower case
