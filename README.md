@@ -18,6 +18,7 @@ By Jony Almeida-
 -   [Respondent Matcher at a Glance](#matcher-at-a-glance)
 -   [Application Architecture & Technologies Used](#application-architecture)
 -   [Backend Overview](#backend-overview)
+-   [Code Highlights](#code-highlights)
 -   [Conclusion & Next Steps](#conclusion-and-next-steps)
 
 ## Respondent Matcher at a Glance
@@ -48,8 +49,7 @@ Built in Node.js, with Javascript and tested with Mocha & Chai Assertion Library
 
 [Pug](https://www.pug.org/) was perfect for creating a web visualization of the results.
 
-##### Tests
-
+## Code Highlights
 ```javascript
 //Async Mocha handle hook with mocha-as-promised library
     describe("checks filetype is .csv", () => {
