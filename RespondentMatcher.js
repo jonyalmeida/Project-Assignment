@@ -21,6 +21,9 @@ class RespondentMatcher {
     getProjectParams() {
         return this.projectParams;
     }
+    getResults() {
+        return this.results;
+    }
 
     // Parse data method
     async parseData() {

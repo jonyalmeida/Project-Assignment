@@ -1,5 +1,5 @@
 const { distanceInKmBetweenEarthCoordinates } = require("./calculateDistance");
-const matchScore = require("./matchScore");
+const { matchScore } = require("./matchScore");
 const binaryInsert = require("./sortingAlgorithm");
 
 // Match respondents with project params

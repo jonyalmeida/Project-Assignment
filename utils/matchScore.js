@@ -1,5 +1,12 @@
 // Matching score algorithm
 function matchScore(industryList, respondent) {
+    if (
+        respondent.closestAvailableCity.distance === undefined ||
+        respondent.industriesMatch.number === undefined
+    ) {
+        throw new BadRespondentData();
+    }
+
     // Calculate percentage of matching industries
     const industryMatchScore = (() =>
         (100 * respondent.industriesMatch.number) / industryList)();
@@ -18,4 +25,12 @@ function matchScore(industryList, respondent) {
     return score.toFixed(2);
 }
 
-module.exports = matchScore;
+// Bad Respondent data error
+function BadRespondentData() {
+    this.message = "Respondent data is damaged or imcomplete.";
+    this.toString = function () {
+        return this.message;
+    };
+}
+
+module.exports = { matchScore, BadRespondentData };
