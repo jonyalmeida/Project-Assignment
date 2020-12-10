@@ -67,11 +67,3 @@ function FileTypeException(filePath) {
 }
 
 module.exports = { readRespondentsData, FileTypeException };
-
-(async () => {
-    try {
-        await readRespondentsData("image.jpg");
-    } catch (err) {
-        console.log(err.toString());
-    }
-})();
