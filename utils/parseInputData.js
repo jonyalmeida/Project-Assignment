@@ -2,6 +2,8 @@ const fs = require("fs").promises;
 
 // Read Respondents' data from .csv file
 async function readRespondentsData(respondentsDataFilePath) {
+    validateDataFileType(respondentsDataFilePath);
+
     const respondentsData = await fs.readFile(
         respondentsDataFilePath,
         "utf8",
@@ -48,4 +50,28 @@ async function readRespondentsData(respondentsDataFilePath) {
     return respondentsDataObject;
 }
 
-module.exports = readRespondentsData;
+// Check file is .csv
+function validateDataFileType(respondentsDataFilePath) {
+    if (!respondentsDataFilePath.endsWith(".csv")) {
+        throw new FileTypeException(respondentsDataFilePath);
+    }
+}
+
+// Filetype error
+function FileTypeException(filePath) {
+    this.filePath = filePath;
+    this.message = " File type is not of format .csv";
+    this.toString = function () {
+        return this.filePath + this.message;
+    };
+}
+
+module.exports = { readRespondentsData, FileTypeException };
+
+(async () => {
+    try {
+        await readRespondentsData("image.jpg");
+    } catch (err) {
+        console.log(err.toString());
+    }
+})();

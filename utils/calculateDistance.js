@@ -5,12 +5,11 @@ function distanceInKmBetweenEarthCoordinates(location1, location2) {
 
     // Check if locations have valid coordinates
     if (Math.abs(lat1) > 90 || Math.abs(lat2) > 90) {
-        return "Latitude out of range.";
-        // throw Error("Latitude out of range.");
+        console.log("jdaIAJDOIJSA");
+        throw new InvalidCoordinateException();
     }
     if (Math.abs(lon1) > 180 || Math.abs(lon2) > 180) {
-        return "Longitude out of range.";
-        // throw Error("Longitude out of range.");
+        throw new InvalidCoordinateException();
     }
 
     const earthRadiusInKm = 6378.137;
@@ -38,4 +37,16 @@ function degreesToRadians(degrees) {
     return (degrees * Math.PI) / 180;
 }
 
-module.exports = { distanceInKmBetweenEarthCoordinates, degreesToRadians };
+// Coordinate out of range error
+function InvalidCoordinateException() {
+    this.message = " Coordinate is not in valid range.";
+    this.toString = function () {
+        return this.message;
+    };
+}
+
+module.exports = {
+    distanceInKmBetweenEarthCoordinates,
+    degreesToRadians,
+    InvalidCoordinateException,
+};
