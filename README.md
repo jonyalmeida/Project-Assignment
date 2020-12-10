@@ -118,6 +118,11 @@ function matchScore(industryList, respondent) {
 }
 ```
 
+## Considerations
+- I assumed that the 3 scoring factors had the same weight when calculating the Matching Score
+- I assumed that a Respondent candidate closest distance would be the closest distance to any of the available cities in the project params cities array  
+- Added a project breakdown readme file with an overall planning of the steps before starting
+
 **Next Steps:**
 Next steps for Respondent Matcher include:
 
