@@ -4,18 +4,20 @@
     "description": "Matching Respondents with Projects",
     "main": "index.js",
     "scripts": {
-        "start": "nodemon ./app/index.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "run": "./RespondentMatcher.js",
+        "start": "./app/index.js",
+        "nodemon-start": "nodemon ./app/index.js",
+        "test": "./node_modules/mocha/bin/mocha tests/**/*Test.js --reporter spec"
     },
     "author": "jony_almeida",
     "license": "ISC",
     "dependencies": {
-        "chai-as-promised": "^7.1.1",
         "express": "^4.17.1",
-        "mocha": "^8.2.1",
         "pug": "^3.0.0"
     },
     "devDependencies": {
+        "chai-as-promised": "^7.1.1",
+        "mocha": "^8.2.1",
         "chai": "^4.2.0",
         "chai-spies": "^1.0.0",
         "nodemon": "^2.0.6"

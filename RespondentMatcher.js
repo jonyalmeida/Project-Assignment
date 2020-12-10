@@ -22,16 +22,19 @@ class RespondentMatcher {
         return this.projectParams;
     }
 
+    // Parse data method
     async parseData() {
         this.parsedData = await readRespondentsData(
             this.respondentsDataFilePath
         );
     }
 
+    // Match respondents to project parameters
     matchRespondentsToProjectParams() {
         this.results = matchRespondents(this.parsedData, this.projectParams);
     }
 
+    // Returns top eight results
     returnTopEightResults() {
         let results = [];
         for (let i = 0; i < 8; i++) {
@@ -40,6 +43,7 @@ class RespondentMatcher {
         return results;
     }
 
+    // Display all matches on terminal
     displayAllMatchedRespondents() {
         console.log("\nAll matches- ordered by matching scores:");
         console.log("===================================\n");
@@ -71,6 +75,7 @@ class RespondentMatcher {
         }
     }
 
+    // Displays top 8 matches on terminal
     displayTopEightMatchedRespondents() {
         console.log("\nTop 8 matches- by matching scores:");
         console.log("===================================\n");
