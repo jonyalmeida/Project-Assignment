@@ -62,10 +62,11 @@ class RespondentMatcher {
                 `Number of matching industries: ${curr.industriesMatch.number}`
             );
             console.log(
-                `Job matches: ${(() =>
+                `Job matches: ${
                     curr.jobMatches.match
                         ? curr.jobMatches.jobTitle
-                        : "No job matches")()}`
+                        : "No job matches"
+                }`
             );
             console.log(
                 `Closest available city: ${curr.closestAvailableCity.city}`
@@ -105,18 +106,16 @@ const newMatcher = new RespondentMatcher(
     projectParams
 );
 
-const demo = () =>
-    (async () => {
-        await newMatcher.parseData();
-        newMatcher.matchRespondentsToProjectParams();
-        newMatcher.displayTopEightMatchedRespondents();
-    })();
+const demo = async () => {
+    await newMatcher.parseData();
+    newMatcher.matchRespondentsToProjectParams();
+    newMatcher.displayTopEightMatchedRespondents();
+};
 
-const demo2 = () =>
-    (async () => {
-        await newMatcher.parseData();
-        newMatcher.matchRespondentsToProjectParams();
-        newMatcher.displayAllMatchedRespondents();
-    })();
+const demo2 = async () => {
+    await newMatcher.parseData();
+    newMatcher.matchRespondentsToProjectParams();
+    newMatcher.displayAllMatchedRespondents();
+};
 
 module.exports = { RespondentMatcher, demo, demo2 };

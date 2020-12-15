@@ -51,10 +51,9 @@ describe("readRespondentsData()", async () => {
 
         it("should return false if object has falsy values", () => {
             parsedData["499"].firstName = "";
-            let result = (() =>
-                Object.keys(parsedData).every((item) => {
-                    Object.keys(item).every((item2) => !!item2);
-                }))();
+            let result = Object.keys(parsedData).every((item) => {
+                Object.keys(item).every((item2) => !!item2);
+            });
             let expected = false;
 
             assert.strictEqual(result, expected);

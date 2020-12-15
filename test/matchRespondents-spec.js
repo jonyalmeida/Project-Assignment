@@ -19,8 +19,7 @@ describe("RespondentMatcher()", () => {
 
     describe("checks class constructor", () => {
         it("should return this.respondentsDataFilePath as filePatch", () => {
-            let result = (() =>
-                matcher.getRespondentsDataFilePath() === filePath)();
+            let result = matcher.getRespondentsDataFilePath() === filePath;
 
             let expected = true;
 

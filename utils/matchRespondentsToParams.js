@@ -5,7 +5,6 @@ const binaryInsert = require("./sortingAlgorithm");
 // Match respondents with project params
 function matchRespondents(respondentsDataObject, projectParams) {
     const matchResults = [];
-    let count = 0;
 
     for (let respondent in respondentsDataObject) {
         const curRespondent = respondentsDataObject[respondent];
